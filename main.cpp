@@ -88,7 +88,7 @@ class Quina{
 
 
 
-
+//Calcula los aciertos
 void calcular_ganadores(){
 
   for(int i=0;i<nrojugadores;i++){
@@ -98,8 +98,7 @@ void calcular_ganadores(){
                         jugadores[i]++;
                     }
                  }
-                 int pot;
-                    //cin>>pot;
+
                 }
             }
 }
@@ -450,7 +449,7 @@ cout<<"Lotogol---------------------------------"<<endl<<endl;
 
 
   gol.set_values (2,0,3);
-  gol.set_values (2,1,3);
+  gol.set_values (2,1,4);
   gol.set_values (2,2,10);
   gol.set_values (2,3,2);
   gol.set_values (2,4,3);
