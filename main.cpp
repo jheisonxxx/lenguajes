@@ -20,13 +20,16 @@ class Quina{
 
     int fila_dinamica;
     int columna_dinamica;
-
+ int nrojugadores=8;
     int * jugadores;
     int * sorteados;
+
+
     int ** matr;
     int aciertos;
-    int nrojugadores=8;
+
     Quina(){
+
 
     jugadores=new int[nrojugadores];
 
@@ -114,20 +117,23 @@ for(int i=0;i<nrojugadores;i++){
         }
     }
 
-    if(jugador_precio==5){
-        precio_total=precio_total+0.50;
+
+
+if(jugador_precio==5){
+        precio_total=precio_total+0.75;
     }
     if(jugador_precio==6){
-        precio_total=precio_total+1.00;
+        precio_total=precio_total+3.00;
     }
     if(jugador_precio==7){
-        precio_total=precio_total+2.5;
+        precio_total=precio_total+7.5;
     }
+
 
 }
 
 cout<<precio_total<<endl;
-precio_total=(38*precio_total)/104.5;
+precio_total=(32.20*precio_total)/104.5;
 cout<<precio_total<<endl;
 return precio_total;
 }
@@ -172,7 +178,21 @@ class Lotogol{
     int ** matr;
     int aciertos;
     int nrojugadores=9;
+       int * jugador_precio;
+
+
     Lotogol(){
+    jugador_precio=new int[nrojugadores];
+
+    jugador_precio[0]=1;
+    jugador_precio[1]=2;
+    jugador_precio[2]=1;
+    jugador_precio[3]=1;
+    jugador_precio[4]=2;
+    jugador_precio[5]=1;
+    jugador_precio[6]=1;
+    jugador_precio[7]=2;
+    jugador_precio[8]=2;
 
     jugadores=new int[nrojugadores];
 
@@ -246,11 +266,11 @@ class Lotogol{
 void calcular_ganadores(){
 
   for(int i=0;i<nrojugadores;i++){
-           // cout<<"primera ite"<<i<<endl;
+            cout<<"primera ite"<<i<<endl;
 
                 for(int k=0;k<10;k=k+2){
                  for(int j = 0; j<10;j=j+2){
-                     //   cout<<matr[i][j]<<" "<<matr[i][j+1]<<"     "<<sorteados[k]<<" "<<sorteados[k+1]<<endl;
+                       cout<<matr[i][j]<<" "<<matr[i][j+1]<<"     "<<sorteados[k]<<" "<<sorteados[k+1]<<endl;
                     if((matr[i][j]==sorteados[k])&&(matr[i][j+1]==sorteados[k+1])){
                         jugadores[i]++;
                     }
@@ -265,26 +285,19 @@ float calcular_precio(){
 
 float precio_total=0;
 for(int i=0;i<nrojugadores;i++){
-    float jugador_precio=0;
-    for(int k=0;k<10;k++){
-        if(matr[i][k]>=0){
-            jugador_precio++;
-        }
+     if(jugador_precio[i]==1){
+        precio_total=precio_total+0.50;
     }
-
-    if(jugador_precio==5){
-        precio_total=precio_total+0.75;
+    if(jugador_precio[i]==2){
+        precio_total=precio_total+1.00;
     }
-    if(jugador_precio==6){
-        precio_total=precio_total+3.00;
-    }
-    if(jugador_precio==7){
-        precio_total=precio_total+7.5;
+    if(jugador_precio[i]==4){
+        precio_total=precio_total+2.00;
     }
 
 }
-
-precio_total=(32.20*precio_total)/104.5;
+cout<<precio_total<<endl;
+precio_total=(28*precio_total)/104.5;
 return precio_total;
 }
 
@@ -309,9 +322,9 @@ return precio_total;
     }
    }
 
-cout<<"quina "<<quina<<" "<<(premios*0.40)/quina<<endl;
-   cout<<"quadra "<<quadra<<" "<<(premios*0.30)/quadra<<endl;
-   cout<<"terno "<<terno<<" "<<(premios*0.30)/terno<<endl;
+   cout<<"1ero (5 acertos) "<<quina<<" "<<(premios*0.40)/quina<<endl;
+   cout<<"2do (4 acertos) "<<quadra<<" "<<(premios*0.30)/quadra<<endl;
+   cout<<"3ro (3 acertos) "<<terno<<" "<<(premios*0.30)/terno<<endl;
    }
 };
 
@@ -521,6 +534,7 @@ cout<<endl;
   //
   cout<<endl;
   premios=gol.calcular_precio();
+  cout<<premios<<endl;
   gol.calcular_reparticion(premios);
 
 
