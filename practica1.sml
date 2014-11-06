@@ -52,3 +52,47 @@ val meses = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Ag
 fun date_to_string(fecha : (int*int*int)) =
 get_nth(meses, #2 fecha) ^ " " ^ Int.toString(#1 fecha) ^ ", " ^ Int.toString(#3 fecha)
 
+(*Ejercicio 8*)
+
+fun number_before_reaching_sum(sum : int, lista : int list) =
+let
+	fun buscar_index(index: int, corrida_sum: int, vs: int list) =
+	if corrida_sum + hd vs >= sum then index
+	else buscar_index(index + 1, corrida_sum + hd vs, tl vs)
+in
+	buscar_index(0, 0, lista)
+end
+
+
+(*Ejercicio  9*)
+val meses_dias = [31,28,31,30,31,30,31,31,30,31,30,31]
+fun what_month (dia : int) =
+	number_before_reaching_sum(dia, meses_dias)+1
+
+
+(*Ejericicio 10*)
+fun month_range(dia1 : int, dia2 :int) =
+	if dia1 > dia2
+		then []
+		else (what_month(dia1)) :: month_range(dia1+1, dia2)
+
+(* Ejercicio 11. *)
+fun oldest(fechas : (int*int*int) list)=
+	if null fechas
+	then NONE
+	else let
+		fun oldest_date(fechas : (int*int*int) list)=
+				if null (tl fechas)
+				then hd fechas
+				else let val fechas_ans = oldest_date(tl fechas)
+					 in
+						if is_older(hd fechas, fechas_ans)
+						then hd fechas
+						else fechas_ans
+					 end
+		in
+			SOME (oldest_date(fechas))
+		end
+
+
+
